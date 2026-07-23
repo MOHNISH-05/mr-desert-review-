@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     SENTRY_DSN: Optional[str] = None
 
-    CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:3002", "https://reviews.mrdesertjaisalmer.in"]
+    CORS_ORIGINS: list[str] = ["*"]
 
     RATE_LIMIT_PER_MINUTE: int = 10
 
