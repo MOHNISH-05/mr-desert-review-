@@ -4,6 +4,7 @@ import { BusinessCards } from "@/components/home/business-cards";
 import { LatestReviews } from "@/components/home/latest-reviews";
 import { HomeCTA } from "@/components/home/home-cta";
 import { api } from "@/lib/api";
+import { FALLBACK_BUSINESSES, FALLBACK_REVIEWS } from "@/lib/fallback-data";
 import type { Business, Review } from "@/types";
 
 export default async function HomePage() {
@@ -20,6 +21,13 @@ export default async function HomePage() {
     // Fallback for when backend is not running
   }
 
+  if (!businesses.length) {
+    businesses = FALLBACK_BUSINESSES;
+  }
+  if (!reviews.length) {
+    reviews = FALLBACK_REVIEWS;
+  }
+
   return (
     <>
       <HeroSection />
@@ -30,3 +38,4 @@ export default async function HomePage() {
     </>
   );
 }
+

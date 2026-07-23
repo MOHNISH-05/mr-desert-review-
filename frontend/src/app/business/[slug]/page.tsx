@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { api } from "@/lib/api";
+import { FALLBACK_BUSINESSES, FALLBACK_REVIEWS } from "@/lib/fallback-data";
 import { BusinessHero } from "@/components/business/business-hero";
 import { BusinessReviews } from "@/components/reviews/review-list";
 import { Sparkles, ArrowUpRight } from "lucide-react";
@@ -54,24 +55,31 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const { slug } = await params;
     const business = await api.businesses.getBySlug(slug);
     return {
       title: `${business.name} Reviews`,
       description: business.short_description || `Read reviews for ${business.name}`,
     };
   } catch {
+    const fallback = FALLBACK_BUSINESSES.find(b => b.slug === slug);
+    if (fallback) {
+      return {
+        title: `${fallback.name} Reviews`,
+        description: fallback.short_description || `Read reviews for ${fallback.name}`,
+      };
+    }
     return { title: "Business Not Found" };
   }
 }
 
 export default async function BusinessPage({ params }: Props) {
   let business;
-  let reviews;
+  let reviews: typeof FALLBACK_REVIEWS = [];
+  const { slug } = await params;
 
   try {
-    const { slug } = await params;
     business = await api.businesses.getBySlug(slug);
     const revRes = await api.reviews.list({
       business_id: business.id,
@@ -80,7 +88,11 @@ export default async function BusinessPage({ params }: Props) {
     });
     reviews = revRes.reviews || [];
   } catch {
-    notFound();
+    business = FALLBACK_BUSINESSES.find(b => b.slug === slug);
+    if (!business) {
+      notFound();
+    }
+    reviews = FALLBACK_REVIEWS.filter(r => r.business_slug === slug);
   }
 
   const details = businessDetails[business.slug];
