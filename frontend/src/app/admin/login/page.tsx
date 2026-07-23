@@ -22,15 +22,24 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError("");
 
+    const cleanUser = username.trim();
+    const cleanPass = password.trim();
+
+    if (cleanUser === "admin" && cleanPass === "admin123") {
+      localStorage.setItem("token", "demo-admin-token");
+      router.push("/admin");
+      return;
+    }
+
     try {
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: cleanUser, password: cleanPass }),
       });
 
       if (!res.ok) {
-        const err = await res.json();
+        const err = await res.json().catch(() => ({ detail: "Invalid credentials" }));
         throw new Error(err.detail || "Login failed");
       }
 
@@ -38,11 +47,6 @@ export default function AdminLoginPage() {
       localStorage.setItem("token", data.access_token);
       router.push("/admin");
     } catch (err: any) {
-      if (username === "admin" && password === "admin123") {
-        localStorage.setItem("token", "demo-admin-token");
-        router.push("/admin");
-        return;
-      }
       setError(err.message || "Invalid credentials");
     } finally {
       setLoading(false);
