@@ -1,0 +1,7 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { api } from "@/lib/api";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { try { const { slug } = await params; const guide = await api.content.guide(slug); return { title: guide.seo_title || guide.title, description: guide.meta_description || guide.excerpt || undefined }; } catch { return {}; } }
+
+export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) { let guide; try { const { slug } = await params; guide = await api.content.guide(slug); } catch { notFound(); } return <article className="pt-28 pb-20"><div className="container max-w-4xl"><p className="eyebrow">{guide.category || "Destination guide"}</p><h1 className="text-4xl md:text-6xl font-serif font-bold mt-3 mb-5">{guide.title}</h1><p className="text-xl text-muted-foreground mb-8">{guide.excerpt}</p><div className="rounded-3xl bg-desert-900 text-white p-8 md:p-12 mb-10"><p className="text-sm uppercase tracking-widest text-desert-200 mb-3">Jaisalmer, Rajasthan</p><p className="text-2xl font-serif">A considered guide to help you experience the Golden City with more time, context and curiosity.</p></div><div className="prose prose-lg max-w-none whitespace-pre-line">{guide.content}</div>{guide.map_url && <a href={guide.map_url} target="_blank" rel="noreferrer" className="inline-block mt-10 text-desert-700 underline">Open this destination in Google Maps →</a>}</div></article>; }
