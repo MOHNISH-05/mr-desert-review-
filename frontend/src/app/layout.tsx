@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { LuxuryProviders } from "@/components/providers/luxury-providers";
+import { JsonLd } from "@/components/seo/json-ld";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -24,56 +25,101 @@ const manrope = Manrope({
   display: "swap",
 });
 
+const baseUrl = "https://mr-desert-review.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
-    default: "Mr. Desert Jaisalmer | Luxury Desert Tourism & Guest Stories",
+    default: "Mr. Desert Reviews | Authentic Jaisalmer Guest Experiences",
     template: "%s | Mr. Desert Jaisalmer",
   },
   description:
-    "Discover Jaisalmer through authentic guest stories. Premium reviews for Mr. Desert, Elite Castle, Happy Adventure Camp and Elite India Tour Planner — curated by Dheeraj Purohit.",
+    "Explore genuine guest reviews for luxury desert camps, heritage fort hotels, and camel safaris in Jaisalmer, Rajasthan. Curated by Dheeraj Purohit.",
   keywords: [
-    "Jaisalmer luxury tourism",
     "Mr Desert Jaisalmer reviews",
-    "Elite Castle Jaisalmer",
-    "Happy Adventure Camp",
-    "Elite India Tour Planner",
-    "desert camp reviews",
-    "Rajasthan travel",
-    "Sam Sand Dunes",
-    "Jaisalmer hotels",
+    "Jaisalmer luxury desert camp",
+    "Elite Castle Jaisalmer review",
+    "Happy Adventure Camp Jaisalmer",
+    "Elite India Tour Planner review",
+    "Jaisalmer camel safari reviews",
+    "Sam Sand Dunes hotels",
+    "Rajasthan luxury tourism",
+    "Jaisalmer fort hotels",
   ],
-  authors: [{ name: "Mr. Desert Jaisalmer" }],
+  authors: [{ name: "Dheeraj Purohit", url: "https://mrdesertjaisalmer.in" }],
   creator: "Mr. Desert Jaisalmer",
+  publisher: "Mr. Desert Jaisalmer",
+  alternates: {
+    canonical: "./",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Mr. Desert Jaisalmer — The Golden City, Told Beautifully",
+    title: "Mr. Desert Reviews | Authentic Jaisalmer Guest Experiences",
     description:
-      "Trusted guest stories for hotels, desert camps & tours in Jaisalmer, Rajasthan.",
+      "Read real reviews for luxury desert camps, heritage fort hotels, and camel safaris in Jaisalmer, Rajasthan.",
+    url: baseUrl,
+    siteName: "Mr. Desert Jaisalmer Reviews",
+    images: [
+      {
+        url: "/images/dheeraj/mr-desert-alley.webp",
+        width: 1200,
+        height: 630,
+        alt: "Mr. Desert Jaisalmer Heritage Architecture",
+      },
+    ],
+    locale: "en_US",
     type: "website",
-    locale: "en_IN",
-    siteName: "Mr. Desert Jaisalmer",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mr. Desert Jaisalmer | Luxury Desert Tourism",
-    description: "Authentic guest stories from Jaisalmer's premier hospitality brands.",
+    title: "Mr. Desert Reviews | Jaisalmer Luxury Tourism",
+    description:
+      "Authentic guest stories for luxury desert camps & fort hotels in Jaisalmer, Rajasthan.",
+    images: ["/images/dheeraj/mr-desert-alley.webp"],
   },
-  robots: { index: true, follow: true },
 };
 
-const jsonLd = {
+const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
+  "@id": `${baseUrl}/#organization`,
   name: "Mr. Desert Jaisalmer",
-  description: "Premium tourism brand offering hotels, desert camps, safaris and Rajasthan tour packages in Jaisalmer.",
-  url: "https://mrdesertjaisalmer.in",
+  url: baseUrl,
+  logo: `${baseUrl}/images/dheeraj/dheeraj-purohit.webp`,
+  image: `${baseUrl}/images/dheeraj/mr-desert-alley.webp`,
+  description:
+    "Premier tourism brand offering luxury desert camps, heritage hotels, camel safaris, and Rajasthan tour packages in Jaisalmer.",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Sam Sand Dunes",
     addressLocality: "Jaisalmer",
     addressRegion: "Rajasthan",
+    postalCode: "345001",
     addressCountry: "IN",
   },
-  telephone: "+91-8854808196",
-  email: "mrdesertjaisalmer@gmail.com",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 26.9157,
+    longitude: 70.9083,
+  },
+  telephone: "+91-9829038039",
+  email: "info@mrdesertjaisalmer.in",
+  sameAs: [
+    "https://mrdesertjaisalmer.in",
+    "https://elitecastlejaisalmer.com",
+    "https://happyadventurecampjaisalmer.com",
+    "https://eliteindiatourplanner.com",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -83,12 +129,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${playfair.variable} ${cormorant.variable} ${manrope.variable}`}
     >
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={organizationSchema} />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col antialiased">
         <LuxuryProviders>
           <Navbar />
           <main className="flex-1">{children}</main>

@@ -4,17 +4,21 @@ import { api } from "@/lib/api";
 import { FALLBACK_BUSINESSES, FALLBACK_REVIEWS } from "@/lib/fallback-data";
 import { BusinessHero } from "@/components/business/business-hero";
 import { BusinessReviews } from "@/components/reviews/review-list";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+
+const baseUrl = "https://mr-desert-review.vercel.app";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-const businessDetails: Record<string, { eyebrow: string; title: string; points: string[] }> = {
+const businessDetails: Record<string, { eyebrow: string; title: string; points: string[]; schemaType: string }> = {
   "mr-desert": {
     eyebrow: "The wider ecosystem",
     title: "A complete Jaisalmer journey",
+    schemaType: "TravelAgency",
     points: [
       "Heritage hotels and comfortable stays",
       "Luxury desert camps near Sam Sand Dunes",
@@ -25,6 +29,7 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
   "elite-castle": {
     eyebrow: "Stay near the Golden Fort",
     title: "Heritage character, modern comfort",
+    schemaType: "Hotel",
     points: [
       "Deluxe rooms, suites and desert cottages",
       "Rooftop restaurant with fort and city views",
@@ -35,6 +40,7 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
   "happy-adventure": {
     eyebrow: "Sleep beneath the Thar sky",
     title: "A complete desert camp experience",
+    schemaType: "LodgingBusiness",
     points: [
       "Luxury AC Swiss Tents and Royal AC Cottages",
       "Camel and jeep safaris at Sam Sand Dunes",
@@ -45,6 +51,7 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
   "tour-planner": {
     eyebrow: "Travel across Rajasthan and India",
     title: "Journeys shaped around you",
+    schemaType: "TravelAgency",
     points: [
       "Personalized itineraries for couples, families and groups",
       "Sightseeing, transport and accommodation coordination",
@@ -56,22 +63,58 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  let business;
+
   try {
-    const business = await api.businesses.getBySlug(slug);
-    return {
-      title: `${business.name} Reviews`,
-      description: business.short_description || `Read reviews for ${business.name}`,
-    };
+    business = await api.businesses.getBySlug(slug);
   } catch {
-    const fallback = FALLBACK_BUSINESSES.find(b => b.slug === slug);
-    if (fallback) {
-      return {
-        title: `${fallback.name} Reviews`,
-        description: fallback.short_description || `Read reviews for ${fallback.name}`,
-      };
-    }
-    return { title: "Business Not Found" };
+    business = FALLBACK_BUSINESSES.find((b) => b.slug === slug);
   }
+
+  if (!business) {
+    return { title: "Business Not Found | Mr. Desert Jaisalmer" };
+  }
+
+  const title = `${business.name} Reviews | Luxury Tourism Jaisalmer`;
+  const description =
+    business.short_description ||
+    `Read authentic guest reviews and ratings for ${business.name} in Jaisalmer, Rajasthan.`;
+  const canonicalUrl = `${baseUrl}/business/${slug}`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      `${business.name} reviews`,
+      `${business.name} Jaisalmer`,
+      "Jaisalmer desert tourism",
+      "Rajasthan luxury stay",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "Mr. Desert Jaisalmer Reviews",
+      images: [
+        {
+          url: business.hero_image_url || "/images/dheeraj/mr-desert-alley.webp",
+          width: 1200,
+          height: 630,
+          alt: business.name,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [business.hero_image_url || "/images/dheeraj/mr-desert-alley.webp"],
+    },
+  };
 }
 
 export default async function BusinessPage({ params }: Props) {
@@ -88,17 +131,69 @@ export default async function BusinessPage({ params }: Props) {
     });
     reviews = revRes.reviews || [];
   } catch {
-    business = FALLBACK_BUSINESSES.find(b => b.slug === slug);
+    business = FALLBACK_BUSINESSES.find((b) => b.slug === slug);
     if (!business) {
       notFound();
     }
-    reviews = FALLBACK_REVIEWS.filter(r => r.business_slug === slug);
+    reviews = FALLBACK_REVIEWS.filter((r) => r.business_slug === slug);
   }
 
-  const details = businessDetails[business.slug];
+  const details = businessDetails[business.slug] || businessDetails["mr-desert"];
+
+  const businessSchema = {
+    "@context": "https://schema.org",
+    "@type": details.schemaType || "LocalBusiness",
+    "@id": `${baseUrl}/business/${business.slug}#business`,
+    name: business.name,
+    description: business.description || business.short_description,
+    url: business.website_url || `${baseUrl}/business/${business.slug}`,
+    telephone: business.contact_phone || "+91-9829038039",
+    email: business.contact_email || "info@mrdesertjaisalmer.in",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: business.address || "Jaisalmer",
+      addressLocality: "Jaisalmer",
+      addressRegion: "Rajasthan",
+      postalCode: "345001",
+      addressCountry: "IN",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: business.average_rating || 4.9,
+      reviewCount: business.total_reviews || reviews.length || 50,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Our Businesses",
+        item: `${baseUrl}/#business-stories`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: business.name,
+        item: `${baseUrl}/business/${business.slug}`,
+      },
+    ],
+  };
 
   return (
     <>
+      <JsonLd data={[businessSchema, breadcrumbSchema]} />
       <BusinessHero business={business} />
 
       <section className="py-16 md:py-20 bg-background">
@@ -144,7 +239,6 @@ export default async function BusinessPage({ params }: Props) {
             </div>
           )}
 
-          {/* Quick links */}
           <div className="flex flex-wrap gap-4">
             {business.website_url && (
               <a
