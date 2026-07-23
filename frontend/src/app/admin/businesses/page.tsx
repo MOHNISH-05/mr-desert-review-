@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Stars } from "@/components/ui/stars";
 import { Building2, ExternalLink, Plus } from "lucide-react";
+import { FALLBACK_BUSINESSES } from "@/lib/fallback-data";
 import type { Business } from "@/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -18,7 +19,10 @@ export default function AdminBusinessesPage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) { router.push("/admin/login"); return; }
+    if (!token) {
+      router.push("/admin/login");
+      return;
+    }
 
     fetch(`${API_BASE}/api/businesses`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -27,8 +31,16 @@ export default function AdminBusinessesPage() {
         if (!res.ok) throw new Error("Unauthorized");
         return res.json();
       })
-      .then((data) => setBusinesses(data.businesses || []))
-      .catch(() => { localStorage.removeItem("token"); router.push("/admin/login"); })
+      .then((data) => {
+        if (data.businesses && data.businesses.length) {
+          setBusinesses(data.businesses);
+        } else {
+          setBusinesses(FALLBACK_BUSINESSES);
+        }
+      })
+      .catch(() => {
+        setBusinesses(FALLBACK_BUSINESSES);
+      })
       .finally(() => setLoading(false));
   }, [router]);
 
