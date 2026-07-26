@@ -17,7 +17,7 @@ export function HeroSection() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-end overflow-hidden bg-[#1A1A1A]">
-      {/* Parallax background with Next.js Image */}
+      {/* Parallax background video with poster fallback */}
       <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: bgY }}>
         <Image
           src="/businesses/mr-desert/6-scaled-e1756826347412.webp"
@@ -25,8 +25,17 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
-          className="object-cover scale-105 transition-transform duration-1000"
+          className="object-cover scale-105"
         />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-90 transition-opacity duration-1000"
+        >
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
+        </video>
       </motion.div>
 
       {/* Gradient overlays */}
