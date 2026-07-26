@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FALLBACK_BUSINESSES } from "@/lib/fallback-data";
 import type { Business } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function NewAdminReviewPage() {
   const router = useRouter();
@@ -51,10 +51,19 @@ export default function NewAdminReviewPage() {
           business_id: Number(values.business_id),
           overall_rating: Number(values.overall_rating),
           is_recommended: true,
+          is_verified: true,
+          is_featured: true,
+          is_published: true,
+          status: "approved",
           review_source: "admin",
         }),
       });
-      if (!response.ok) throw new Error("Could not create review");
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.detail || "Could not save review to database.");
+      }
+
       const review = await response.json();
       if (photos.length) {
         const media = new FormData();
@@ -62,9 +71,8 @@ export default function NewAdminReviewPage() {
         await fetch(`${API_BASE}/api/reviews/${review.id}/media`, { method: "POST", body: media }).catch(() => {});
       }
       router.push("/admin/reviews");
-    } catch {
-      alert("Review saved locally in publicity desk!");
-      router.push("/admin/reviews");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to save review in database.");
     } finally {
       setLoading(false);
     }

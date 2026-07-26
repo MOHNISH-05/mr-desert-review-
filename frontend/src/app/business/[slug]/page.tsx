@@ -118,6 +118,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function BusinessPage({ params }: Props) {
   let business;
   let reviews: typeof FALLBACK_REVIEWS = [];

@@ -1,11 +1,12 @@
 import type { Business, BusinessListResponse, Review, PaginatedResponse, GalleryItem, DashboardStats, ContentItem } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
 async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${path}`;
   const res = await fetch(url, {
     headers: { "Content-Type": "application/json", ...options?.headers },
+    cache: "no-store",
     ...options,
   });
   if (!res.ok) {
