@@ -8,33 +8,35 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ArrowUpRight, BookOpen, Map, Camera } from "lucide-react";
 
+import Image from "next/image";
+
 const businesses = [
   {
     href: "/business/mr-desert",
     label: "Mr. Desert Jaisalmer",
     desc: "Hotels, camps & safaris",
-    image: "/images/dheeraj/mr-desert-alley.webp",
+    image: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
     external: "https://mrdesertjaisalmer.in",
   },
   {
     href: "/business/elite-castle",
     label: "Elite Castle",
     desc: "Heritage hotel near the fort",
-    image: "/images/official/elite-castle-story.webp",
+    image: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg",
     external: "https://elitecastlejaisalmer.com",
   },
   {
     href: "/business/happy-adventure",
     label: "Happy Adventure Camp",
     desc: "Luxury desert camping",
-    image: "/images/dheeraj/happy-camp-night.webp",
+    image: "/businesses/happy-adventure-camp/DSC02608_1024x683.webp",
     external: "https://happyadventurecampjaisalmer.com",
   },
   {
     href: "/business/tour-planner",
     label: "Elite India Tour Planner",
     desc: "Custom Rajasthan journeys",
-    image: "/images/dheeraj/camel-safari.webp",
+    image: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp",
     external: "https://eliteindiatourplanner.com",
   },
 ];
@@ -83,14 +85,12 @@ export function Navbar() {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative">
-            <img
-              src="/images/mr-desert-logo.png"
+          <div className="relative h-11 w-11">
+            <Image
+              src="/businesses/mr-desert/logo.png"
               alt="Mr. Desert Reviews"
-              className={cn(
-                "rounded-full object-cover ring-2 transition-all duration-500",
-                scrolled ? "h-9 w-9 ring-desert-400/40" : "h-11 w-11 ring-desert-400/60 group-hover:ring-desert-400"
-              )}
+              fill
+              className="rounded-full object-cover ring-2 ring-desert-400/60 group-hover:ring-desert-400 transition-all duration-300"
             />
             <div className="absolute inset-0 rounded-full bg-desert-500/20 opacity-0 group-hover:opacity-100 transition-opacity blur-md" />
           </div>

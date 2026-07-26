@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/official/elite-castle-story.webp",
+        url: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg",
         width: 1200,
         height: 630,
         alt: "Contact Mr. Desert Jaisalmer",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Contact Us | Mr. Desert Jaisalmer Travel Desk",
     description:
       "Get in touch with Mr. Desert Jaisalmer for luxury desert camp bookings and hotel stays.",
-    images: ["/images/official/elite-castle-story.webp"],
+    images: ["/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg"],
   },
 };
 

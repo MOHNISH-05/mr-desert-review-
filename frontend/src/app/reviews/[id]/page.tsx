@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Mr. Desert Jaisalmer Reviews",
       images: [
         {
-          url: "/images/dheeraj/mr-desert-alley.webp",
+          url: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
           width: 1200,
           height: 630,
           alt: title,
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/dheeraj/mr-desert-alley.webp"],
+      images: ["/businesses/mr-desert/6-scaled-e1756826347412.webp"],
     },
   };
 }
@@ -91,7 +91,7 @@ export default async function ReviewStoryPage({ params }: Props) {
   }
 
   const images = review.media?.filter((item) => item.media_type === "image") || [];
-  const cover = images[0] ? assetUrl(images[0].url) : "/images/dheeraj/mr-desert-alley.webp";
+  const cover = images[0] ? assetUrl(images[0].url) : "/businesses/mr-desert/6-scaled-e1756826347412.webp";
   let related: Review[] = [];
 
   try {

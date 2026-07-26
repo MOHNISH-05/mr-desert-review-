@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/mr-desert-alley.webp",
+        url: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
         width: 1200,
         height: 630,
         alt: "Mr. Desert Jaisalmer Heritage Experience",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "Mr. Desert Reviews | Real Guest Experiences in Jaisalmer",
     description:
       "Discover authentic guest stories for luxury desert camps, heritage fort hotels, and camel safaris in Jaisalmer.",
-    images: ["/images/dheeraj/mr-desert-alley.webp"],
+    images: ["/businesses/mr-desert/6-scaled-e1756826347412.webp"],
   },
 };
 

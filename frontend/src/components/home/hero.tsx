@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
@@ -16,11 +17,15 @@ export function HeroSection() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-end overflow-hidden bg-[#1A1A1A]">
-      {/* Parallax background */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{ backgroundImage: "url('/images/official/mr-desert-story.jpg')" }}
+      {/* Parallax background with Next.js Image */}
+      <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: bgY }}>
+        <Image
+          src="/businesses/mr-desert/6-scaled-e1756826347412.webp"
+          alt="Mr. Desert Jaisalmer Thar Desert Experience"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover scale-105 transition-transform duration-1000"
         />
       </motion.div>
 

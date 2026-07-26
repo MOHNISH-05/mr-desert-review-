@@ -3,21 +3,16 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Stars } from "@/components/ui/stars";
 import { ExternalLink, Phone, MapPin, Calendar, ArrowLeft, PenLine, Sparkles } from "lucide-react";
 import type { Business } from "@/types";
+import { getBusinessHeroImage } from "@/lib/business-images";
 
 interface BusinessHeroProps {
   business: Business;
 }
-
-const businessImages: Record<string, string> = {
-  "mr-desert": "/images/dheeraj/mr-desert-alley.webp",
-  "elite-castle": "/images/official/elite-castle.webp",
-  "happy-adventure": "/images/dheeraj/happy-camp-day.webp",
-  "tour-planner": "/images/official/mr-desert.jpg",
-};
 
 export function BusinessHero({ business }: BusinessHeroProps) {
   const ref = useRef<HTMLElement>(null);
@@ -25,19 +20,23 @@ export function BusinessHero({ business }: BusinessHeroProps) {
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
-  const bg = businessImages[business.slug] || businessImages["mr-desert"];
+  const bg = business.hero_image_url || getBusinessHeroImage(business.slug);
 
   return (
     <section ref={ref} className="relative min-h-[70vh] flex items-end overflow-hidden bg-[#1A1A1A]">
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{ backgroundImage: `url(${bg})` }}
+      <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ y: bgY }}>
+        <Image
+          src={bg}
+          alt={`${business.name} Hero Image`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover scale-105 transition-transform duration-1000"
         />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/95 via-[#1A1A1A]/50 to-[#1A1A1A]/30" />
-      <div className="absolute inset-0 bg-gradient-hero opacity-60" />
-      <div className="absolute inset-0 noise-overlay" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/95 via-[#1A1A1A]/50 to-[#1A1A1A]/30 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-hero opacity-60 z-[1]" />
+      <div className="absolute inset-0 noise-overlay z-[1]" aria-hidden="true" />
 
       <motion.div className="container relative z-10 py-20 md:py-24" style={{ opacity }}>
         <motion.div
@@ -55,7 +54,14 @@ export function BusinessHero({ business }: BusinessHeroProps) {
 
           <div className="max-w-3xl">
             {business.logo_url && (
-              <img src={business.logo_url} alt={business.name} className="h-16 w-auto mb-5" />
+              <div className="relative h-16 w-48 mb-5">
+                <Image
+                  src={business.logo_url}
+                  alt={`${business.name} Logo`}
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
             )}
 
             <p className="eyebrow text-amber-300/80 mb-4 flex items-center gap-2">

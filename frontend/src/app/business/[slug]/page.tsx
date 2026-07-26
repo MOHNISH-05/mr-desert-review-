@@ -4,6 +4,7 @@ import { api } from "@/lib/api";
 import { FALLBACK_BUSINESSES, FALLBACK_REVIEWS } from "@/lib/fallback-data";
 import { BusinessHero } from "@/components/business/business-hero";
 import { BusinessReviews } from "@/components/reviews/review-list";
+import { BusinessInstagramFeed } from "@/components/business/instagram-feed";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -100,7 +101,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Mr. Desert Jaisalmer Reviews",
       images: [
         {
-          url: business.hero_image_url || "/images/dheeraj/mr-desert-alley.webp",
+          url: business.hero_image_url || "/businesses/mr-desert/6-scaled-e1756826347412.webp",
           width: 1200,
           height: 630,
           alt: business.name,
@@ -112,7 +113,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [business.hero_image_url || "/images/dheeraj/mr-desert-alley.webp"],
+      images: [business.hero_image_url || "/businesses/mr-desert/6-scaled-e1756826347412.webp"],
     },
   };
 }
@@ -265,6 +266,8 @@ export default async function BusinessPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <BusinessInstagramFeed slug={business.slug} businessName={business.name} />
 
       <BusinessReviews
         reviews={reviews}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Button } from "@/components/ui/button";
@@ -22,14 +23,19 @@ export default function AboutPage() {
   return (
     <div className="pt-28 pb-24 min-h-screen bg-background">
       {/* Hero */}
-      <div className="relative mb-20 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: "url('/images/dheeraj/dheeraj-purohit.webp')" }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" aria-hidden="true" />
-        <div className="container relative max-w-4xl py-12 text-center">
+      <div className="relative mb-20 overflow-hidden bg-[#1A1A1A]">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/businesses/elite-india-tour-planner/dheeraj-purohit.webp"
+            alt="Dheeraj Purohit Mr. Desert Founder"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-30"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background z-[1]" aria-hidden="true" />
+        <div className="container relative max-w-4xl py-12 text-center z-10">
           <ScrollReveal>
             <p className="eyebrow justify-center flex items-center gap-2">
               <Sparkles className="h-3.5 w-3.5" />

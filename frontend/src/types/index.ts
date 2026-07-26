@@ -24,9 +24,10 @@ export interface Business {
 
 export interface ReviewMedia {
   id: number;
+  review_id?: number | null;
   media_type: string;
   url: string;
-  public_id: string | null;
+  public_id?: string | null;
   width: number | null;
   height: number | null;
 }

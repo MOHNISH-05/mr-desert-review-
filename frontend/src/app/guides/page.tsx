@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { FALLBACK_GUIDES } from "@/lib/fallback-data";
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/camel-safari.webp",
+        url: "/businesses/elite-india-tour-planner/tour-safari.webp",
         width: 1200,
         height: 630,
         alt: "Jaisalmer Destination Guides",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     title: "Jaisalmer Destination Guides | Forts, Dunes & Safaris",
     description:
       "Expert local destination guides for Jaisalmer Fort, Sam Sand Dunes, and Thar Desert safaris.",
-    images: ["/images/dheeraj/camel-safari.webp"],
+    images: ["/businesses/elite-india-tour-planner/tour-safari.webp"],
   },
 };
 
@@ -92,14 +93,19 @@ export default async function GuidesPage() {
     <>
       <JsonLd data={[breadcrumbSchema, itemListSchema]} />
       <div className="pt-28 pb-24 min-h-screen bg-background">
-        <div className="relative mb-16 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('/images/dheeraj/camel-safari.webp')" }}
-            aria-hidden="true"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" aria-hidden="true" />
-          <div className="container relative max-w-3xl py-12">
+        <div className="relative mb-16 overflow-hidden bg-[#1A1A1A]">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/businesses/elite-india-tour-planner/tour-safari.webp"
+              alt="Jaisalmer Destination Guides Header"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-25"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background z-[1]" aria-hidden="true" />
+          <div className="container relative max-w-3xl py-12 z-10">
             <p className="eyebrow flex items-center gap-2">
               <Map className="h-3.5 w-3.5" />
               Plan your Jaisalmer journey

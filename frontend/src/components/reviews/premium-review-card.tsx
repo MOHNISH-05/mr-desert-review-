@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, ExternalLink, Heart, MapPin, Share2, X, Camera } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, CalendarDays, ExternalLink, Heart, MapPin, Share2, X, Camera, ChevronLeft, ChevronRight } from "lucide-react";
 import { api } from "@/lib/api";
 import { Avatar } from "@/components/ui/avatar";
 import { Stars } from "@/components/ui/stars";
@@ -14,10 +15,12 @@ import type { Review } from "@/types";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 const businessMeta: Record<string, { label: string; icon: string; fallback: string }> = {
-  "mr-desert": { label: "Mr. Desert Jaisalmer", icon: "🌵", fallback: "/images/dheeraj/mr-desert-alley.webp" },
-  "elite-castle": { label: "Elite Castle", icon: "🏨", fallback: "/images/official/elite-castle-story.webp" },
-  "happy-adventure": { label: "Happy Adventure Camp", icon: "🏕", fallback: "/images/dheeraj/happy-camp-day.webp" },
-  "tour-planner": { label: "Elite India Tour Planner", icon: "🚙", fallback: "/images/dheeraj/camel-safari.webp" },
+  "mr-desert": { label: "Mr. Desert Jaisalmer", icon: "🌵", fallback: "/businesses/mr-desert/6-scaled-e1756826347412.webp" },
+  "elite-castle": { label: "Elite Castle Jaisalmer", icon: "🏨", fallback: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg" },
+  "happy-adventure": { label: "Happy Adventure Camp", icon: "🏕", fallback: "/businesses/happy-adventure-camp/DSC02608_1024x683.webp" },
+  "happy-adventure-camp": { label: "Happy Adventure Camp", icon: "🏕", fallback: "/businesses/happy-adventure-camp/DSC02608_1024x683.webp" },
+  "tour-planner": { label: "Elite India Tour Planner", icon: "🚙", fallback: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp" },
+  "elite-india-tour-planner": { label: "Elite India Tour Planner", icon: "🚙", fallback: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp" },
 };
 
 function mediaUrl(url: string) {
@@ -56,22 +59,24 @@ export function PremiumReviewCard({ review, index = 0 }: { review: Review; index
       >
         {/* Magazine hero image */}
         <Link href={`/reviews/${review.id}`} className="relative block aspect-[16/10] overflow-hidden bg-desert-100">
-          <img
+          <Image
             src={cover}
             alt={review.title || `${meta.label} guest story`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/25 z-10 pointer-events-none" />
 
           {/* Business badge */}
-          <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3.5 py-1.5 text-[11px] font-medium text-white backdrop-blur-md">
+          <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3.5 py-1.5 text-[11px] font-medium text-white backdrop-blur-md z-20">
             {meta.icon} {meta.label}
           </span>
 
           {/* Photo count */}
           {remaining > 0 && (
-            <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+            <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm z-20">
               <Camera className="h-3.5 w-3.5" />
               +{remaining} photos
             </span>
@@ -79,7 +84,7 @@ export function PremiumReviewCard({ review, index = 0 }: { review: Review; index
 
           {/* Country flag overlay */}
           {review.country && (
-            <span className="absolute bottom-4 left-4 text-2xl drop-shadow-lg">
+            <span className="absolute bottom-4 left-4 text-2xl drop-shadow-lg z-20">
               {getCountryFlag(review.country)}
             </span>
           )}
@@ -134,11 +139,18 @@ export function PremiumReviewCard({ review, index = 0 }: { review: Review; index
                   key={image.id}
                   type="button"
                   onClick={() => setLightboxIndex(imageIndex)}
-                  className="relative aspect-square overflow-hidden rounded-lg bg-desert-50 image-zoom"
+                  className="relative aspect-square overflow-hidden rounded-lg bg-desert-50 image-zoom focus:outline-none focus:ring-2 focus:ring-desert-500"
                 >
-                  <img src={mediaUrl(image.url)} alt="Guest gallery" loading="lazy" className="h-full w-full object-cover" />
+                  <Image
+                    src={mediaUrl(image.url)}
+                    alt={`Guest photo ${imageIndex + 1}`}
+                    fill
+                    sizes="100px"
+                    className="object-cover"
+                    loading="lazy"
+                  />
                   {imageIndex === 3 && images.length > 4 && (
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-semibold text-white">
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-semibold text-white z-10">
                       +{images.length - 4}
                     </span>
                   )}
@@ -198,30 +210,68 @@ export function PremiumReviewCard({ review, index = 0 }: { review: Review; index
         </div>
       </motion.article>
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
+      {/* Lightbox Modal with Controls & Counter */}
+      {lightboxIndex !== null && images[lightboxIndex] && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="lightbox-overlay"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
           onClick={() => setLightboxIndex(null)}
         >
-          <button
-            type="button"
-            onClick={() => setLightboxIndex(null)}
-            className="absolute right-5 top-5 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors"
-            aria-label="Close"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <motion.img
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            src={mediaUrl(images[lightboxIndex]?.url || "")}
-            alt="Guest gallery"
-            className="lightbox-image"
+          {/* Header bar */}
+          <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-50 text-white">
+            <span className="text-sm font-medium tracking-wide bg-black/40 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm">
+              {meta.label} · Photo {lightboxIndex + 1} of {images.length}
+            </span>
+            <button
+              type="button"
+              onClick={() => setLightboxIndex(null)}
+              className="rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors"
+              aria-label="Close lightbox"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Navigation Controls */}
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : 0));
+                }}
+                className="absolute left-5 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors z-50"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => (prev !== null ? (prev + 1) % images.length : 0));
+                }}
+                className="absolute right-5 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors z-50"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </>
+          )}
+
+          <div
+            className="relative max-w-5xl max-h-[85vh] w-full h-full flex items-center justify-center p-2"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <Image
+              src={mediaUrl(images[lightboxIndex].url)}
+              alt={`${review.title || meta.label} photo ${lightboxIndex + 1}`}
+              fill
+              className="object-contain"
+            />
+          </div>
         </motion.div>
       )}
     </>

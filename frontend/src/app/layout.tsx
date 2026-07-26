@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/mr-desert-alley.webp",
+        url: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
         width: 1200,
         height: 630,
         alt: "Mr. Desert Jaisalmer Heritage Architecture",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Mr. Desert Reviews | Jaisalmer Luxury Tourism",
     description:
       "Authentic guest stories for luxury desert camps & fort hotels in Jaisalmer, Rajasthan.",
-    images: ["/images/dheeraj/mr-desert-alley.webp"],
+    images: ["/businesses/mr-desert/6-scaled-e1756826347412.webp"],
   },
 };
 
@@ -95,8 +95,8 @@ const organizationSchema = {
   "@id": `${baseUrl}/#organization`,
   name: "Mr. Desert Jaisalmer",
   url: baseUrl,
-  logo: `${baseUrl}/images/dheeraj/dheeraj-purohit.webp`,
-  image: `${baseUrl}/images/dheeraj/mr-desert-alley.webp`,
+  logo: `${baseUrl}/businesses/mr-desert/logo.png`,
+  image: `${baseUrl}/businesses/mr-desert/6-scaled-e1756826347412.webp`,
   description:
     "Premier tourism brand offering luxury desert camps, heritage hotels, camel safaris, and Rajasthan tour packages in Jaisalmer.",
   address: {

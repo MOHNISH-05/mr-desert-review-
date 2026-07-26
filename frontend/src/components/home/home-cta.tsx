@@ -1,23 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function HomeCTA() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/dheeraj/happy-camp-night.webp')" }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-[#1A1A1A]/85" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-r from-desert-900/30 via-transparent to-desert-900/30" aria-hidden="true" />
-      <div className="absolute inset-0 noise-overlay" aria-hidden="true" />
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[#1A1A1A]">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/businesses/happy-adventure-camp/E-1_1024x698.webp"
+          alt="Happy Adventure Camp Night CTA Background"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25"
+          loading="lazy"
+        />
+      </div>
+      <div className="absolute inset-0 bg-[#1A1A1A]/75 z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-desert-900/30 via-transparent to-desert-900/30 z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 noise-overlay z-[1]" aria-hidden="true" />
 
-      <div className="container relative text-center">
+      <div className="container relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

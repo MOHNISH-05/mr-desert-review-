@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Mr. Desert Jaisalmer Guides",
       images: [
         {
-          url: guide.hero_image_url || "/images/dheeraj/camel-safari.webp",
+          url: guide.hero_image_url || "/businesses/elite-india-tour-planner/tour-safari.webp",
           width: 1200,
           height: 630,
           alt: guide.title,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [guide.hero_image_url || "/images/dheeraj/camel-safari.webp"],
+      images: [guide.hero_image_url || "/businesses/elite-india-tour-planner/tour-safari.webp"],
     },
   };
 }
@@ -87,7 +87,7 @@ export default async function GuidePage({ params }: Props) {
     "@id": `${baseUrl}/guides/${slug}#attraction`,
     name: guide.title,
     description: guide.excerpt || guide.meta_description,
-    image: guide.hero_image_url || `${baseUrl}/images/dheeraj/camel-safari.webp`,
+    image: guide.hero_image_url || `${baseUrl}/businesses/elite-india-tour-planner/tour-safari.webp`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Jaisalmer",

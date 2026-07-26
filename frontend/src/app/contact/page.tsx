@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,14 +18,19 @@ export default function ContactPage() {
   return (
     <div className="pt-28 pb-24 min-h-screen bg-background">
       {/* Header */}
-      <div className="relative mb-16 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('/images/official/elite-castle-story.webp')" }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" aria-hidden="true" />
-        <div className="container relative max-w-5xl py-12 text-center">
+      <div className="relative mb-16 overflow-hidden bg-[#1A1A1A]">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg"
+            alt="Elite Castle Jaisalmer Contact Background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-25"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background z-[1]" aria-hidden="true" />
+        <div className="container relative max-w-5xl py-12 text-center z-10">
           <ScrollReveal>
             <p className="eyebrow justify-center flex">We&apos;d love to hear from you</p>
             <h1 className="section-heading mb-5">
@@ -38,94 +44,86 @@ export default function ContactPage() {
       </div>
 
       <div className="container max-w-5xl">
-        {/* Contact cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
-          {contactMethods.map((item, i) => (
-            <motion.a
-              key={item.title}
-              href={item.href}
-              target={item.title === "WhatsApp" ? "_blank" : undefined}
-              rel={item.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-card p-7 text-center hover:shadow-luxury-lg transition-all duration-500 group"
-            >
-              <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-desert-50 mb-4 group-hover:scale-110 transition-transform ${item.color}`}>
-                <item.icon className="h-6 w-6" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold mb-1">{item.title}</h3>
-              <p className="text-desert-600 text-sm group-hover:underline">{item.value}</p>
-            </motion.a>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Form */}
-          <ScrollReveal>
-            <div className="glass-card p-7 md:p-9">
-              <h2 className="font-serif text-2xl font-semibold mb-2">Send us a Message</h2>
-              <p className="text-sm text-muted-foreground mb-7">We typically respond within 24 hours</p>
-              <form className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium mb-1.5 block">Name *</label>
-                    <Input placeholder="Your name" required className="rounded-xl border-desert-100 focus:border-desert-400" />
+        <div className="grid lg:grid-cols-12 gap-12">
+          {/* Contact form */}
+          <div className="lg:col-span-7">
+            <ScrollReveal>
+              <div className="glass-card p-8 md:p-10">
+                <h2 className="font-serif text-2xl font-semibold mb-6">Send us a message</h2>
+                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                        Your Name
+                      </label>
+                      <Input placeholder="John Doe" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                        Email Address
+                      </label>
+                      <Input type="email" placeholder="john@example.com" />
+                    </div>
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">Email *</label>
-                    <Input type="email" placeholder="your@email.com" required className="rounded-xl border-desert-100 focus:border-desert-400" />
-                  </div>
-                </div>
-                <div>
-                  <label className="text-sm font-medium mb-1.5 block">Subject</label>
-                  <Input placeholder="How can we help?" className="rounded-xl border-desert-100 focus:border-desert-400" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium mb-1.5 block">Message *</label>
-                  <Textarea rows={5} placeholder="Tell us about your travel plans..." required className="rounded-xl border-desert-100 focus:border-desert-400 resize-none" />
-                </div>
-                <Button type="submit" variant="gold" size="lg" className="w-full group">
-                  Send Message
-                  <Send className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </form>
-            </div>
-          </ScrollReveal>
-
-          {/* Map & location */}
-          <ScrollReveal delay={0.15}>
-            <div className="space-y-5">
-              <div className="glass-card p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-desert-50">
-                    <MapPin className="h-5 w-5 text-desert-600" />
+                    <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                      Subject
+                    </label>
+                    <Input placeholder="Inquiry about desert camping or hotel stays" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-semibold mb-1">Visit Us</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Near Sam Sand Dunes, Jaisalmer,<br />
-                      Rajasthan 345001, India
-                    </p>
+                    <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                      Message
+                    </label>
+                    <Textarea placeholder="Tell us about your upcoming travel plans or questions..." rows={5} />
                   </div>
-                </div>
+                  <Button variant="gold" size="lg" className="w-full">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
               </div>
+            </ScrollReveal>
+          </div>
 
-              <div className="rounded-2xl overflow-hidden h-72 md:h-80 shadow-luxury border border-desert-100">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3594.123!2d70.9123!3d26.9123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzQ0LjMiTiA3MMKwNTQnNDQuMyJF!5e0!3m2!1sen!2sin!4v1"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mr. Desert Jaisalmer location"
-                />
+          {/* Contact info side */}
+          <div className="lg:col-span-5 space-y-6">
+            <ScrollReveal delay={0.1}>
+              <div className="glass-card p-8 space-y-6">
+                <h3 className="font-serif text-xl font-semibold border-b border-desert-100 pb-4">Direct Contact</h3>
+                {contactMethods.map((method) => (
+                  <a
+                    key={method.title}
+                    href={method.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-desert-50 transition-colors group"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-desert-50 group-hover:bg-desert-100 transition-colors">
+                      <method.icon className={`h-5 w-5 ${method.color}`} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{method.title}</p>
+                      <p className="text-sm font-semibold text-foreground group-hover:text-desert-700 transition-colors">{method.value}</p>
+                    </div>
+                  </a>
+                ))}
               </div>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="glass-card p-8">
+                <h3 className="font-serif text-xl font-semibold mb-4">Location & Hours</h3>
+                <div className="flex items-start gap-3 text-sm text-muted-foreground mb-4">
+                  <MapPin className="h-5 w-5 text-desert-500 shrink-0 mt-0.5" />
+                  <p>Sam Sand Dunes & Near Jaisalmer Fort, Jaisalmer, Rajasthan 345001</p>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Support hours: 24/7 for booking inquiries and ongoing guest assistance.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </div>
     </div>

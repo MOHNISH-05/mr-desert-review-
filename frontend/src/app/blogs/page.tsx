@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { FALLBACK_BLOGS } from "@/lib/fallback-data";
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/mr-desert-alley.webp",
+        url: "/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp",
         width: 1200,
         height: 630,
         alt: "Jaisalmer Travel Journal",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     title: "Desert Journal & Travel Stories | Mr. Desert Jaisalmer",
     description:
       "Explore travel guides, desert camping tips, fort history, and local insights for visiting Jaisalmer.",
-    images: ["/images/dheeraj/mr-desert-alley.webp"],
+    images: ["/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp"],
   },
 };
 
@@ -92,14 +93,19 @@ export default async function BlogsPage() {
     <>
       <JsonLd data={[breadcrumbSchema, itemListSchema]} />
       <div className="pt-28 pb-24 min-h-screen bg-background">
-        <div className="relative mb-16 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('/images/dheeraj/mr-desert-alley.webp')" }}
-            aria-hidden="true"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/85 to-background" aria-hidden="true" />
-          <div className="container relative max-w-3xl py-12">
+        <div className="relative mb-16 overflow-hidden bg-[#1A1A1A]">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp"
+              alt="Jaisalmer Desert Journal Header"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-25"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/85 to-background z-[1]" aria-hidden="true" />
+          <div className="container relative max-w-3xl py-12 z-10">
             <p className="eyebrow">The Desert Journal</p>
             <h1 className="section-heading mb-5">
               Stories from the{" "}

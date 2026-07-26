@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/dheeraj-purohit.webp",
+        url: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp",
         width: 1200,
         height: 630,
         alt: "Dheeraj Purohit - Founder of Mr. Desert Jaisalmer",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "About Us | Mr. Desert Jaisalmer Tourism Platform",
     description:
       "Learn about Mr. Desert Jaisalmer — premier hospitality brand by Dheeraj Purohit.",
-    images: ["/images/dheeraj/dheeraj-purohit.webp"],
+    images: ["/businesses/elite-india-tour-planner/dheeraj-purohit.webp"],
   },
 };
 

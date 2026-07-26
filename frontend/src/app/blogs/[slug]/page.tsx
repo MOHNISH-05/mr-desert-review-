@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { api } from "@/lib/api";
 import { FALLBACK_BLOGS } from "@/lib/fallback-data";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Mr. Desert Jaisalmer Journal",
       images: [
         {
-          url: blog.hero_image_url || "/images/dheeraj/mr-desert-alley.webp",
+          url: blog.hero_image_url || "/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp",
           width: 1200,
           height: 630,
           alt: blog.title,
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [blog.hero_image_url || "/images/dheeraj/mr-desert-alley.webp"],
+      images: [blog.hero_image_url || "/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp"],
     },
   };
 }
@@ -89,7 +90,7 @@ export default async function BlogPage({ params }: Props) {
     "@id": `${baseUrl}/blogs/${slug}#article`,
     headline: blog.title,
     description: blog.excerpt || blog.meta_description,
-    image: blog.hero_image_url || `${baseUrl}/images/dheeraj/mr-desert-alley.webp`,
+    image: blog.hero_image_url || `${baseUrl}/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp`,
     datePublished: blog.published_at || "2026-01-10",
     author: {
       "@type": "Person",
@@ -138,15 +139,14 @@ export default async function BlogPage({ params }: Props) {
           <h1 className="text-4xl md:text-6xl font-serif font-bold mt-3 mb-5">{blog.title}</h1>
           <p className="text-xl text-muted-foreground mb-8">{blog.excerpt}</p>
           
-          <div className="h-72 md:h-[28rem] rounded-3xl overflow-hidden bg-gradient-to-br from-desert-700 via-desert-500 to-amber-200 mb-10 shadow-luxury">
-            <img
-              src={blog.hero_image_url || "/images/dheeraj/mr-desert-alley.webp"}
+          <div className="relative h-72 md:h-[28rem] rounded-3xl overflow-hidden bg-desert-100 mb-10 shadow-luxury">
+            <Image
+              src={blog.hero_image_url || "/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp"}
               alt={blog.title}
-              width={1200}
-              height={600}
-              loading="eager"
-              decoding="async"
-              className="w-full h-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className="object-cover"
             />
           </div>
 

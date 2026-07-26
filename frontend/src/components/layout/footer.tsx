@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin, Phone, Mail, MessageCircle,
@@ -36,28 +37,35 @@ export function Footer() {
   return (
     <footer className="relative bg-[#1A1A1A] text-white overflow-hidden">
       {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: "url('/images/dheeraj/camel-safari.webp')" }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A]/95 to-[#1A1A1A]" aria-hidden="true" />
-      <div className="absolute inset-0 noise-overlay" aria-hidden="true" />
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/businesses/elite-india-tour-planner/camel-safari.webp"
+          alt="Desert Background"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A]/95 to-[#1A1A1A] z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 noise-overlay z-[1]" aria-hidden="true" />
 
       {/* Decorative glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-desert-500/50 to-transparent" aria-hidden="true" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-desert-500/50 to-transparent z-[1]" aria-hidden="true" />
 
-      <div className="container relative py-20 md:py-24">
+      <div className="container relative z-10 py-20 md:py-24">
         {/* Top section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-6">
-              <img
-                src="/images/mr-desert-logo.png"
-                alt="Mr. Desert Jaisalmer"
-                className="h-14 w-14 rounded-full object-cover ring-2 ring-desert-500/40"
-              />
+              <div className="relative h-14 w-14 rounded-full overflow-hidden ring-2 ring-desert-500/40">
+                <Image
+                  src="/businesses/mr-desert/logo.png"
+                  alt="Mr. Desert Jaisalmer"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div>
                 <span className="font-serif text-2xl font-bold text-gradient-gold block">
                   Mr. Desert

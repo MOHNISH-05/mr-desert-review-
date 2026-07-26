@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Mr. Desert Jaisalmer Reviews",
     images: [
       {
-        url: "/images/dheeraj/happy-camp-night.webp",
+        url: "/businesses/happy-adventure-camp/E-1_1024x698.webp",
         width: 1200,
         height: 630,
         alt: "Guest Stories from Jaisalmer Sand Dunes",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Guest Stories & Reviews | Mr. Desert Jaisalmer",
     description:
       "Read verified guest reviews and authentic stories about desert camping and fort stays in Jaisalmer.",
-    images: ["/images/dheeraj/happy-camp-night.webp"],
+    images: ["/businesses/happy-adventure-camp/E-1_1024x698.webp"],
   },
 };
 
