@@ -38,27 +38,20 @@ export function HeroSection() {
         </video>
       </motion.div>
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 z-[1] bg-gradient-hero" />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#1A1A1A]/90 via-transparent to-[#1A1A1A]/20" />
-      <div className="absolute inset-0 z-[1] noise-overlay" aria-hidden="true" />
+      {/* Cinematic dark & gradient overlays */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/40 to-[#1A1A1A]/30" />
+      
+      {/* Subtle luxury radial vignette */}
+      <div className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.5)_100%)] pointer-events-none" aria-hidden="true" />
 
-      {/* Animated blobs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-desert-500/10 blur-3xl animate-blob z-[1]" aria-hidden="true" />
-      <div className="absolute bottom-1/3 left-1/4 w-72 h-72 rounded-full bg-amber-400/8 blur-3xl animate-blob z-[1]" style={{ animationDelay: "-4s" }} aria-hidden="true" />
+      {/* Soft ambient golden light behind heading */}
+      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none z-[2]" aria-hidden="true" />
 
-      {/* Desert particles */}
-      <DesertParticles count={50} />
+      {/* Soft top-right sun glow accent */}
+      <div className="absolute top-0 right-[12%] w-[500px] h-[350px] bg-[radial-gradient(circle_at_top,rgba(255,215,0,0.05)_0%,transparent_70%)] pointer-events-none z-[2]" aria-hidden="true" />
 
-      {/* Slow-moving clouds */}
-      <div className="absolute top-[15%] left-0 right-0 z-[2] opacity-20 pointer-events-none" aria-hidden="true">
-        <svg className="w-full animate-cloud-drift" viewBox="0 0 1200 80" fill="none">
-          <ellipse cx="200" cy="40" rx="120" ry="25" fill="white" opacity="0.6" />
-          <ellipse cx="280" cy="35" rx="80" ry="20" fill="white" opacity="0.4" />
-          <ellipse cx="700" cy="50" rx="150" ry="30" fill="white" opacity="0.5" />
-          <ellipse cx="820" cy="45" rx="90" ry="22" fill="white" opacity="0.35" />
-        </svg>
-      </div>
+      {/* Lightweight desert sand particles */}
+      <DesertParticles count={35} />
 
       {/* Camel silhouette */}
       <div className="absolute bottom-[18%] right-[8%] z-[2] hidden lg:block opacity-15 pointer-events-none animate-float-slow" aria-hidden="true">
