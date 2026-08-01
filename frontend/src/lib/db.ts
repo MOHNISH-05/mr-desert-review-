@@ -6,7 +6,7 @@ export function normalizeSlug(slug: string): string {
   return slug;
 }
 import { FALLBACK_BUSINESSES, FALLBACK_REVIEWS } from "@/lib/fallback-data";
-import type { Review, Business } from "@/types";
+import type { Review, Business, ReviewMedia } from "@/types";
 
 const DATA_DIR = path.join(process.cwd(), ".data");
 const REVIEWS_FILE = path.join(DATA_DIR, "reviews.json");
@@ -215,6 +215,24 @@ export function updateDatabaseReview(id: number, updateData: Partial<Review>): R
   saveBusinessesToDisk(businesses);
 
   return updated;
+}
+
+export function addReviewMedia(
+  id: number,
+  mediaItems: ReviewMedia[]
+): Review | null {
+  const reviews = getDatabaseReviews();
+  const review = reviews.find((r) => r.id === id);
+  if (!review) return null;
+
+  if (!review.media) {
+    review.media = [];
+  }
+  review.media.push(...mediaItems);
+  review.updated_at = new Date().toISOString();
+
+  saveReviewsToDisk(reviews);
+  return review;
 }
 
 export function deleteDatabaseReview(id: number): boolean {

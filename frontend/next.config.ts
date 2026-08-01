@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   // Keep local development artifacts separate from production builds.
   distDir: process.env.NODE_ENV === "development" ? ".next-local" : ".next",
   trailingSlash: false,
+  transpilePackages: ["lucide-react"],
+  experimental: {
+    optimizePackageImports: [],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "res.cloudinary.com" },
@@ -48,10 +52,11 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    if (!process.env.NEXT_PUBLIC_API_URL) return [];
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
       },
     ];
   },
