@@ -10,7 +10,7 @@ import { Building2, ExternalLink, Plus } from "lucide-react";
 import { FALLBACK_BUSINESSES } from "@/lib/fallback-data";
 import type { Business } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = "";
 
 export default function AdminBusinessesPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);

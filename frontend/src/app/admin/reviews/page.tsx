@@ -14,7 +14,7 @@ import {
 import { FALLBACK_REVIEWS } from "@/lib/fallback-data";
 import type { Review } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+const API_BASE = "";
 
 export default function AdminReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([]);

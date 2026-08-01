@@ -1,6 +1,6 @@
 import type { Business, BusinessListResponse, Review, PaginatedResponse, GalleryItem, DashboardStats, ContentItem } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+const API_BASE = "";
 
 async function fetchAPI<T>(path: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${path}`;

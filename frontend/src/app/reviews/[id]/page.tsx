@@ -11,7 +11,7 @@ import { ArrowLeft, CalendarDays, ExternalLink, MapPin } from "lucide-react";
 import type { Review } from "@/types";
 
 const baseUrl = "https://mr-desert-review.vercel.app";
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = "";
 type Props = { params: Promise<{ id: string }> };
 const assetUrl = (url: string) => (url.startsWith("/uploads/") ? `${API_BASE}${url}` : url);
 

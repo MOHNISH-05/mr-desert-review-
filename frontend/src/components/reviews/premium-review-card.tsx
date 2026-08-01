@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatDate, getCountryFlag } from "@/lib/utils";
 import type { Review } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = "";
 
 const businessMeta: Record<string, { label: string; icon: string; fallback: string }> = {
   "mr-desert": { label: "Mr. Desert Jaisalmer", icon: "🌵", fallback: "/businesses/mr-desert/6-scaled-e1756826347412.webp" },

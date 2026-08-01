@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Business } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+const API_BASE = "";
 
 export default function WriteReviewPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);

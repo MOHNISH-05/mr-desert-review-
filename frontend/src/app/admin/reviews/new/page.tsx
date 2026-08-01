@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FALLBACK_BUSINESSES } from "@/lib/fallback-data";
 import type { Business } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+const API_BASE = "";
 
 export default function NewAdminReviewPage() {
   const router = useRouter();
