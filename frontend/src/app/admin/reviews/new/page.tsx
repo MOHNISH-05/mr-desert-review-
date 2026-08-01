@@ -42,6 +42,13 @@ export default function NewAdminReviewPage() {
     setError("");
     const token = localStorage.getItem("token") || "admin-active-session";
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+    
+    if (!values.business_id) {
+      setError("Please select a business from the dropdown.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(`${API_BASE}/api/reviews`, {
         method: "POST",
