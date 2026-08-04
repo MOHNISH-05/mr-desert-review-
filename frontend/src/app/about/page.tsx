@@ -11,6 +11,8 @@ const businesses = [
   { icon: "🏨", name: "Elite Castle Jaisalmer", desc: "Luxury heritage hotel near Jaisalmer Fort", slug: "elite-castle" },
   { icon: "🏕️", name: "Happy Adventure Camp", desc: "Luxury desert camping in the Thar Desert", slug: "happy-adventure" },
   { icon: "🚙", name: "Elite India Tour Planner", desc: "Customized Rajasthan tour packages", slug: "tour-planner" },
+  { icon: "🏢", name: "Hotel Jaisal Inn", desc: "Premium hotel near Gadisar Road with pool & dining", slug: "jaisal-inn" },
+  { icon: "🏰", name: "Vijay Bagh", desc: "Luxury heritage village resort near Kuldhara", slug: "vijay-bagh" },
 ];
 
 const values = [
@@ -65,7 +67,7 @@ export default function AboutPage() {
           <div className="glass-card p-8 md:p-10">
             <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6">Our Businesses</h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Four premier travel and hospitality brands, united under one golden city:
+              Six premier travel and hospitality brands, united under one golden city:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {businesses.map((item) => (

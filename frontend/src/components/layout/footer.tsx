@@ -14,6 +14,8 @@ const businesses = [
   { name: "Elite Castle Jaisalmer", slug: "elite-castle", url: "https://elitecastlejaisalmer.com" },
   { name: "Happy Adventure Camp", slug: "happy-adventure", url: "https://happyadventurecampjaisalmer.com" },
   { name: "Elite India Tour Planner", slug: "tour-planner", url: "https://eliteindiatourplanner.com" },
+  { name: "Hotel Jaisal Inn", slug: "jaisal-inn", url: "https://jaisalinnjaisalmer.com/" },
+  { name: "Vijay Bagh", slug: "vijay-bagh", url: "https://www.vijaybagh.com/" },
 ];
 
 const quickLinks = [
@@ -76,7 +78,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-white/55 text-sm leading-relaxed mb-6 max-w-sm">
-              The official review journal for four premier Jaisalmer hospitality brands. Guest experiences presented as editorial travel stories with photography and context.
+              The official review journal for six premier Jaisalmer hospitality brands. Guest experiences presented as editorial travel stories with photography and context.
             </p>
 
             {/* Awards */}

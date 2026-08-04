@@ -60,6 +60,28 @@ const businessDetails: Record<string, { eyebrow: string; title: string; points: 
       "Rajasthan heritage, desert and cultural experiences",
     ],
   },
+  "jaisal-inn": {
+    eyebrow: "Stay near Gadisar Road",
+    title: "Premium hotel & rooftop dining",
+    schemaType: "Hotel",
+    points: [
+      "Luxury rooms, family suites and premium amenities",
+      "Rooftop restaurant with authentic dining",
+      "Refreshing swimming pool & hospitality services",
+      "Desert safari packages and city tour assistance",
+    ],
+  },
+  "vijay-bagh": {
+    eyebrow: "Heritage village resort near Kuldhara",
+    title: "Royal Rajasthani heritage & desert living",
+    schemaType: "Resort",
+    points: [
+      "Royal heritage suites and luxury desert cottages",
+      "Authentic Rajasthani dining & traditional folk music",
+      "Near historical Kuldhara ghost village",
+      "Guided desert tours and stargazing experiences",
+    ],
+  },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

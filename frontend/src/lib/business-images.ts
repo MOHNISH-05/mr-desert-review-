@@ -258,6 +258,42 @@ export const BUSINESS_IMAGE_MAP: Record<string, BusinessImage[]> = {
       businessName: "Elite India Tour Planner",
     },
   ],
+  "jaisal-inn": [
+    {
+      id: "jaisal-inn-1",
+      url: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.43.jpeg",
+      alt: "Hotel Jaisal Inn Exterior & Heritage Architecture",
+      title: "Hotel Jaisal Inn Exterior",
+      businessSlug: "jaisal-inn",
+      businessName: "Hotel Jaisal Inn",
+    },
+    {
+      id: "jaisal-inn-2",
+      url: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.40.jpeg",
+      alt: "Hotel Jaisal Inn Rooftop Restaurant & City Views",
+      title: "Rooftop Dining & Pool View",
+      businessSlug: "jaisal-inn",
+      businessName: "Hotel Jaisal Inn",
+    },
+  ],
+  "vijay-bagh": [
+    {
+      id: "vijay-bagh-1",
+      url: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
+      alt: "Vijay Bagh Heritage Village Resort & Desert Tents",
+      title: "Vijay Bagh Resort & Desert Tents",
+      businessSlug: "vijay-bagh",
+      businessName: "Vijay Bagh",
+    },
+    {
+      id: "vijay-bagh-2",
+      url: "/businesses/mr-desert/IMG-20250826-WA0122_1024x683.webp",
+      alt: "Vijay Bagh Heritage Suites & Village Ambience",
+      title: "Royal Heritage Village Suites",
+      businessSlug: "vijay-bagh",
+      businessName: "Vijay Bagh",
+    },
+  ],
 };
 
 export function normalizeBusinessSlug(slug: string): string {

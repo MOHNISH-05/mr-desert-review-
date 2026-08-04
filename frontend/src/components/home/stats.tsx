@@ -6,7 +6,7 @@ import { AnimatedCounter } from "@/components/effects/animated-counter";
 const stats = [
   ["4.9", "Guest rating"],
   ["1,200+", "Stories shared"],
-  ["04", "Official places"],
+  ["06", "Official places"],
   ["2025", "Mr. Desert Jaisalmer"],
 ];
 

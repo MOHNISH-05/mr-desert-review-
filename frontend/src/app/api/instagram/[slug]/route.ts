@@ -20,6 +20,8 @@ const TOKEN_ENV_KEYS: Record<string, string> = {
   "happy-adventure": "INSTAGRAM_TOKEN_HAPPY_CAMP",
   "elite-india-tour-planner": "INSTAGRAM_TOKEN_TOUR_PLANNER",
   "tour-planner": "INSTAGRAM_TOKEN_TOUR_PLANNER",
+  "jaisal-inn": "INSTAGRAM_TOKEN_JAISAL_INN",
+  "vijay-bagh": "INSTAGRAM_TOKEN_VIJAY_BAGH",
 };
 
 export async function GET(

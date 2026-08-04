@@ -33,8 +33,16 @@ export function getDatabaseReviews(): Review[] {
   if (fs.existsSync(REVIEWS_FILE)) {
     try {
       const data = fs.readFileSync(REVIEWS_FILE, "utf-8");
-      memoryReviews = JSON.parse(data);
-      return memoryReviews || [];
+      const loaded: Review[] = JSON.parse(data);
+      if (Array.isArray(loaded) && loaded.length > 0) {
+        FALLBACK_REVIEWS.forEach((fr) => {
+          if (!loaded.some((r) => r.id === fr.id)) {
+            loaded.push(fr);
+          }
+        });
+        memoryReviews = loaded;
+        return memoryReviews;
+      }
     } catch (e) {
       console.warn("Could not read reviews database file, seeding defaults.", e);
     }
@@ -53,8 +61,17 @@ export function getDatabaseBusinesses(): Business[] {
   if (fs.existsSync(BUSINESSES_FILE)) {
     try {
       const data = fs.readFileSync(BUSINESSES_FILE, "utf-8");
-      memoryBusinesses = JSON.parse(data);
-      return memoryBusinesses || [];
+      const loaded: Business[] = JSON.parse(data);
+      if (Array.isArray(loaded) && loaded.length > 0) {
+        // Ensure new businesses from FALLBACK_BUSINESSES are included if not present in loaded file
+        FALLBACK_BUSINESSES.forEach((fb) => {
+          if (!loaded.some((b) => b.id === fb.id || b.slug === fb.slug)) {
+            loaded.push(fb);
+          }
+        });
+        memoryBusinesses = loaded;
+        return memoryBusinesses;
+      }
     } catch (e) {
       console.warn("Could not read businesses database file, seeding defaults.", e);
     }

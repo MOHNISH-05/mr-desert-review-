@@ -39,6 +39,20 @@ const businesses = [
     image: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp",
     external: "https://eliteindiatourplanner.com",
   },
+  {
+    href: "/business/jaisal-inn",
+    label: "Hotel Jaisal Inn",
+    desc: "Premium hotel & rooftop pool",
+    image: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.43.jpeg",
+    external: "https://jaisalinnjaisalmer.com/",
+  },
+  {
+    href: "/business/vijay-bagh",
+    label: "Vijay Bagh",
+    desc: "Luxury heritage village resort",
+    image: "/businesses/mr-desert/6-scaled-e1756826347412.webp",
+    external: "https://www.vijaybagh.com/",
+  },
 ];
 
 const navLinks = [

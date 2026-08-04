@@ -27,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "elite-castle",
     "happy-adventure",
     "tour-planner",
+    "jaisal-inn",
+    "vijay-bagh",
   ];
 
   const businessRoutes = businessSlugs.map((slug) => ({
@@ -37,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Reviews
-  const reviewIds = [101, 102, 103, 104, 105];
+  const reviewIds = [101, 102, 103, 104, 105, 106, 107];
   const reviewRoutes = reviewIds.map((id) => ({
     url: `${baseUrl}/reviews/${id}`,
     lastModified,
@@ -51,6 +53,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "first-timers-guide-desert-camp",
     "jaisalmer-fort-living-heritage",
     "camel-safari-or-jeep-safari",
+    "luxury-stays-near-gadisar-lake-road",
+    "discovering-kuldhara-village-resort-living",
   ];
 
   const blogRoutes = blogSlugs.map((slug) => ({
@@ -66,6 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "sam-sand-dunes-guide",
     "gadisar-lake-guide",
     "camel-safari-guide",
+    "kuldhara-heritage-guide",
   ];
 
   const guideRoutes = guideSlugs.map((slug) => ({

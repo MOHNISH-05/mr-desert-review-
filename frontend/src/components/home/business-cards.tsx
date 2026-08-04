@@ -31,6 +31,16 @@ const stories: Record<string, { kicker: string; title: string; copy: string }> =
     title: "Go beyond the expected",
     copy: "Thoughtful Rajasthan journeys planned with local knowledge, graceful pacing and a sense of place — travel as it should be experienced.",
   },
+  "jaisal-inn": {
+    kicker: "05 · The Hotel",
+    title: "Modern luxury near Gadisar Road",
+    copy: "Hotel Jaisal Inn offers premium rooms, a refreshing rooftop swimming pool, fine dining and seamless desert safari arrangements near Gadisar Lake.",
+  },
+  "vijay-bagh": {
+    kicker: "06 · The Heritage Resort",
+    title: "Royal heritage village living",
+    copy: "Nestled near historical Kuldhara, Vijay Bagh presents heritage suites, desert cottages, traditional folk dining and serene desert quiet.",
+  },
 };
 
 const shortNames: Record<string, string> = {
@@ -38,6 +48,8 @@ const shortNames: Record<string, string> = {
   "elite-castle": "Elite Castle Jaisalmer",
   "happy-adventure": "Happy Adventure Camp",
   "tour-planner": "Elite India Tour Planner",
+  "jaisal-inn": "Hotel Jaisal Inn",
+  "vijay-bagh": "Vijay Bagh",
 };
 
 function StoryImage({ slug, alt, kicker }: { slug: string; alt: string; kicker: string }) {

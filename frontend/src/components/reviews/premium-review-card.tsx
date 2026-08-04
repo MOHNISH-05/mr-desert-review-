@@ -21,6 +21,8 @@ const businessMeta: Record<string, { label: string; icon: string; fallback: stri
   "happy-adventure-camp": { label: "Happy Adventure Camp", icon: "🏕", fallback: "/businesses/happy-adventure-camp/DSC02608_1024x683.webp" },
   "tour-planner": { label: "Elite India Tour Planner", icon: "🚙", fallback: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp" },
   "elite-india-tour-planner": { label: "Elite India Tour Planner", icon: "🚙", fallback: "/businesses/elite-india-tour-planner/dheeraj-purohit.webp" },
+  "jaisal-inn": { label: "Hotel Jaisal Inn", icon: "🏢", fallback: "/businesses/elite-castle/WhatsApp Image 2026-07-26 at 18.50.43.jpeg" },
+  "vijay-bagh": { label: "Vijay Bagh", icon: "🏰", fallback: "/businesses/mr-desert/6-scaled-e1756826347412.webp" },
 };
 
 function mediaUrl(url: string) {
